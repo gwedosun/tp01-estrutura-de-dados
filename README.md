@@ -1,2 +1,41 @@
 # tp01-estrutura-de-dados
-Atividade avaliativa referente à disciplina de Estrutura de Dados, 2025.2.
+Atividade avaliativa sugerida pelo Professor Marcelo Eustáquio como composição da nota da disciplina Estrutura de Dados, 2025.2, do curso de Bacharelado em Ciência da Computação da Universidade Católica de Brasília.
+
+Alunos: Beatriz Evangelista, Gabriella Braga e Keven Régio.
+
+Descrição do problema:
+A partir de uma base de dados de processos existentes no Tribunal de Justiça do Distrito Federal e Territórios, construir um código-fonte capaz de determinar:
+1. o número de processos presentes na base de dados;
+2. o id_ultimo_oj a partir de id_processo;
+3. o id_processo do processo com dt_recebimento mais antigo;
+4. quantos processos estão relacionadas a causas de violência doméstica;
+5. quantos processos estão relacionadas a causas de feminicídio;
+6. quantos processos estão relacionadas a causas ambientais;
+7. quantos processos estão relacionadas a causas de quilombolas;
+8. quantos processos estão relacionadas a causas indígenas;
+9. quantos processos envolve causas relacionadas a infância e juventude;
+10. o número de dias entre dt_recebimento e dt_resolvido;
+11. o percentual de cumprimento da meta 1; e
+12. gerar um arquivo CSV com todos os processos julgados (mérito) na Meta 1;
+
+Seguindo as observações de implementação:
+- Implementar e utilizar o Tipo Abstrato de Dados (TAD);
+- Código-fonte estruturado em três arquivos;
+- Implementar uma função para resolução de cada item;
+
+# O programa
+Desenvolvido para analisar e processar dados de processos judiciais, é estruturado em um Tipo Abstrato de Dados chamado Processo, dividido em três arquivos principais (processo.h, processo.c e main.c), a serem detalhados abaixo:
+
+## processo.h
+O arquivo processo.h define a estrutura do TAD Processo e declara as funções que serão usadas para manipular os dados dos processos.
+Inclui-se a biblioteca <stdbool.h> para melhor manipulação dos dados que, segundo a documentação cedida, são definidos em TRUE ou FALSE (booleanos).
+A struct Processo armazena identificadores (id_processo, id_tribunal), informações textuais (sigla_grau, procedimentos), datas (dt_recebimento, dt_resolvido) e flags temáticas (flag_ambiental, flag_indigenas). Os identificadores id_processo e id_ultimo_oj são definidos como char* e têm memória alocada dinamicamente, visto que podem conter valores grandes e/ou alfanuméricos.
+As flags temáticas são do tipo booleano.
+A Meta 1 é representada pelos campos cnm1, primeirasentm1, baixm1, decm1, mpum1, julgadom1, desm1, susm1.
+
+## processo.c
+A primeira função, criar_processo_de_linha, aloca memória dinamicamente para o objeto Processo e preenche seus atributos.
+Na parte de tokenização, usa-se strtok_s para separar os campos da linha no arquivo .csv a cada ";" encontrado, e preenche a struct com o valor correspondente.
+A segunda função, liberar_processo, libera toda a memória alocada pelos ponteiros e libera também a struct em si, prevenindo vazamentos de memória.
+
+## main.c
