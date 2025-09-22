@@ -39,3 +39,17 @@ Na parte de tokenização, usa-se strtok_s para separar os campos da linha no ar
 A segunda função, liberar_processo, libera toda a memória alocada pelos ponteiros e libera também a struct em si, prevenindo vazamentos de memória.
 
 ## main.c
+A função é responsável por destrinchar as funções de processo.h e processo.c e gerenciar a execução do código, guarda os dados do arquivo CSV, utiliza alocação dinâmica de memória para mostrar os resultados chamados pelas funções do código. E possui a função principal que integra todas as funções todas as etapas.
+As principais funções são:
+    - contar_numeros_processos: retorna o número total de processos carregados;
+    - encontrar_processo_mais_antigo: identifica o processo com a data de recebimento mais antiga (dt_recebimento);
+    - contar_violencia_domestica, contar_feminicidio, contar_ambiental, contar_quilombolas, contar_indigenas, contar_infancia: realizam contagens especificas de cada flag;
+    - calcular_dias: calcula o número de dias entre dt_recebimento e dt_resolvido de um processo (return - 1 caso não esteja resolvido);
+    - calcular_cumprimento_meta1: calcula o porcentual de cumprimento da META1 com base nos campos relacionados (julgadom1, cnm1, desm1, susm1);
+    - gerar_csv_julgados_meta1: gera um arquivo processos_julgados_meta1.csv contendo apenas os processos julgados na META1.
+Função Principal:
+Executa em quatro etapas
+    1. Leitura do CSV: ignora o cabeçalho e aloca os processos em memória dinâmica usando criar_processo_de_linha;
+    2. Execução das análises: chama cada função dos requisitos (de 1 a 12) e exibe o resultado após compilado no terminal;
+    3. Geração de arquivo: cria um novo CSV com os processos julgados na META1;
+    4. Liberação de memória: libera os processos alocados e encerra a execução do programa.
